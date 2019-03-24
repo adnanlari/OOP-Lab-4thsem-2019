@@ -25,33 +25,11 @@ int main()
 
     for(ll i=1;i<=n;i++)
     {
-    	cout<<setw(2*(n-i+1))<<setfill(' ')<<"1 ";
+    	cout<<setw(n-i+1)<<setfill('*')<<"1";
     	for(ll j=2;j<=i;j++)
-    		cout<<j<<" ";
+    		cout<<j;
     	for(ll k=i-1;k>=1;k--)
-    	{
-    		if(k!=1)
-    			cout<<k<<" ";
-    		else
-    			cout<<k;
-
-    	}
-    	cout<<setw(2*(n-i+1));
-    	cout<<"\n";
-    }
-    for(ll i=n-1;i>=1;i--)
-    {
-    	cout<<setw(2*(n-i+1))<<setfill(' ')<<"1 ";
-    	for(ll j=2;j<=i;j++)
-    		cout<<j<<" ";
-    	for(ll k=i-1;k>=1;k--)
-    	{
-    		if(k!=1)
-    			cout<<k<<" ";
-    		else
-    			cout<<k;
-    	}
-    	cout<<setw(2*(n-i+1));
+    		cout<<k;
     	cout<<"\n";
     }
 
