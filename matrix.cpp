@@ -8,18 +8,18 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-
+template <typename T>
 class mat
 {
 public:
 	int size;
-	int **A;
+	T **A;
 	mat(int s=0)
 	{
 		size=s;
-		A=new int* [size];
+		A=new T* [size];
 		for(int i=0;i<size;i++)
-			*(A+i)=new int[size];
+			*(A+i)=new T[size];
 		cout<<"Input "<<size<<"*"<<size<<" elements : \n";
 		for(int i=0;i<size;i++)
 		{
@@ -27,12 +27,12 @@ public:
 				cin>>*(*(A+j)+i);
 		}
 	}
-	mat(mat const &x)
+	mat(mat<T> const &x)
 	{
 		size=x.size;
-		A=new int* [size];
+		A=new T* [size];
 		for(int i=0;i<size;i++)
-			*(A+i)=new int[size];
+			*(A+i)=new T[size];
 		for(int i=0;i<size;i++)
 		{
 			for(int j=0;j<size;j++)
@@ -41,9 +41,9 @@ public:
 
 	}
 
-	friend mat operator + (mat const &a,mat const &b)
+	friend mat<T> operator + (mat<T> const &a,mat<T> const &b)
 	{
-		mat c=a;
+		mat<T> c=a;
 		for(int i=0;i<c.size;i++)
 		{
 			for(int j=0;j<c.size;j++)
@@ -53,9 +53,9 @@ public:
 
 
 	}
-	friend mat operator - (mat const &a,mat const &b)
+	friend mat<T> operator - (mat<T> const &a,mat<T> const &b)
 	{
-		mat c=a;
+		mat<T> c=a;
 		for(int i=0;i<c.size;i++)
 		{
 			for(int j=0;j<c.size;j++)
@@ -65,14 +65,14 @@ public:
 
 
 	}
-	friend mat operator * (mat const &a,mat const &b)
+	friend mat<T> operator * (mat<T> const &a,mat<T> const &b)
 	{
-		mat c=a;
+		mat<T> c=a;
 		for(int i=0;i<c.size;i++)
 		{
 			for(int j=0;j<c.size;j++)
 			{
-				int x=0;
+				T x=0;
 				for(int k=0;k<c.size;k++)
 					x+=(*(*(a.A+k)+i))*(*(*(b.A+j)+k));
 				*(*(c.A+j)+i)=x;
@@ -80,30 +80,30 @@ public:
 		}
 		return c;
 	}
-	friend void operator ++ (mat &a)
+	friend void operator ++ (mat<T> &a)
 	{
 		for(int i=0;i<a.size;i++)
 		{
 			for(int j=0;j<a.size;j++)
 			{
-				++(*(*(a.A+j)+i));
+				(*(*(a.A+j)+i))+=1.0;
 			}
 		}
 	}
-	friend void operator -- (mat &a)
+	friend void operator -- (mat<T> &a)
 	{
 		for(int i=0;i<a.size;i++)
 		{
 			for(int j=0;j<a.size;j++)
 			{
-				--(*(*(a.A+j)+i));
+				(*(*(a.A+j)+i))-=1.0;
 			}
 		}
 	}
 
-	friend mat operator - (mat const &a)
+	friend mat<T> operator - (mat<T> const &a)
 	{
-		mat c=a;
+		mat<T> c=a;
 		for(int i=0;i<a.size;i++)
 		{
 			for(int j=0;j<a.size;j++)
@@ -113,9 +113,9 @@ public:
 		}
 		return c;
 	}
-	friend mat operator ~ (mat const &a)
+	friend mat<T> operator ~ (mat<T> const &a)
 	{
-		mat c=a;
+		mat<T> c=a;
 		for(int i=0;i<a.size;i++)
 		{
 			for(int j=0;j<a.size;j++)
@@ -141,19 +141,25 @@ public:
 };
 int main()
 {
-	mat a(3),b(3);
-	mat c=a+b;
+	mat<float> a(2),b(2);
+	mat<float> c=a+b;
 	c.dikha();
+	cout<<"\n";
 	c=a-b;
 	c.dikha();
+	cout<<"\n";
 	c=a*b;
 	c.dikha();
+	cout<<"\n";
 	++c;
 	c.dikha();
+	cout<<"\n";
 	--c;
 	c.dikha();
+	cout<<"\n";
 	c=-c;
 	c.dikha();
+	cout<<"\n";
 	c=~c;
 	c.dikha();
 

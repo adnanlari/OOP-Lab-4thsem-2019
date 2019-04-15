@@ -1,7 +1,7 @@
 /***********************************************************
 * Name : Adnan Masroor 
 * Roll : 17CS8053
-* Implementation : Stack using classes in C++
+* Implementation : Queue using classes in C++
 ***********************************************************/
 
 #include <bits/stdc++.h>
@@ -9,70 +9,75 @@ using namespace std;
 #define MAX 1000
 
 template <typename T>
-class Stack
+class Queue
 {
 	public:
-		int top;
+		int l,r;
 		T *A=new T[MAX];
 
-		Stack()
+		Queue()
 		{
-			top=-1;
+			l=r=-1;
 		}
 
 		void push(T x);
 		void pop();
 		void display();
 
-		~Stack()
+		~Queue()
 		{
-			cout<<"Stack has been dissoved!\nThank You!!\n";
+			cout<<"Queue has been dissoved!\nThank You!!\n";
 			delete(A);
 		}
 };
 
 template <typename T>
-void Stack<T>::push(T x)
+void Queue<T>::push(T x)
 {
-	if(top==MAX-1)
+	if(r==MAX-1)
 		cout<<"Overflow!\n";
+	else if(l==r && l==-1)
+		l=r=0;
 	else
-	{
-		++top;
-		*(A+top)=x;
-		cout<<x<<" has been pushed into the stack!\n";
-	}
+		++r;
+	*(A+r)=x;
+	cout<<x<<" has been pushed into the Queue!\n";
 }
 template <typename T>
- void Stack<T>::pop()
+ void Queue<T>::pop()
 {
-	if(top==-1)
+	if(l==r && l==-1)
 		cout<<"Underflow!\n";
+	else if(l==r && l!=-1)
+	{
+		cout<<(*(A+l))<<" has been popped from the Queue!\n";
+		l=r=-1;
+	}
 	else
 	{
-		cout<<(*(A+top))<<" has been popped from the stack!\n";
-		--top;
+		cout<<(*(A+l))<<" has been popped from the Queue!\n";
+		++l;
 	}
 }
 template <typename T>
- void Stack<T>::display()
+ void Queue<T>::display()
 {
-	if(top==-1)
-		cout<<"Stack is Empty!\n";
+	if(l==r && l==-1)
+		cout<<"Queue is Empty!\n";
 	else
 	{
-		cout<<"Stack :\n";
-		for(int i=0;i<=top;i++)
+		cout<<"Queue :\n";
+		for(int i=l;i<=r;i++)
 			cout<<*(A+i)<<" ";
 		cout<<"\n";
 	}
 }
 int main()
 {
-	Stack<string> my_s;
+	Queue<float> my_s;
 	cout<<"**********MENU**********\n1.Display\n2.Push\n3.Pop\n4.Exit\n";
 	int ch;
-	string x;
+	float x;
 	while(1)
 	{
 		cout<<"Enter your choice : ";

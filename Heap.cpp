@@ -7,20 +7,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define MAX 1000
-
+template <typename T>
 class Heap
 {
 public:
-	int *H;
+	T *H;
 	int p;
 	Heap()
 	{
-		H=new int[MAX];
+		H=new T[MAX];
 		p=0;
 	}
-	void ghusao(int x);
+	void ghusao(T x);
 	void dikhao();
-	int nikalo();
+	T nikalo();
 	int daye(int i) { return i+i+2; }
 	int baye(int i) { return i+i+1; }
 	void Heapify(int i);
@@ -31,8 +31,8 @@ public:
 	}
 
 };
-
-void Heap::ghusao(int x)
+template <typename T>
+void Heap<T>::ghusao(T x)
 {
 	*(H+p)=x;
 	int i=p,count=0;
@@ -46,8 +46,8 @@ void Heap::ghusao(int x)
 		i=(i-1)/2;
 	}
 }
-
-void Heap::dikhao()
+template <typename T>
+void Heap<T>::dikhao()
 {
 	int i=0,q=1;
 	if(!p)
@@ -69,8 +69,8 @@ void Heap::dikhao()
 
 	}
 }
-
-int Heap::nikalo()
+template <typename T>
+T Heap<T>::nikalo()
 {
 	int x=*H;
 	*H=*(H+p-1);
@@ -78,8 +78,8 @@ int Heap::nikalo()
 	Heap::Heapify(0);
 	return x;
 }
-
-void Heap::Heapify(int i)
+template <typename T>
+void Heap<T>::Heapify(int i)
 {
 	int l=baye(i),r=daye(i),g=i;
 	if(l<p && *(H+l)>*(H+g))
@@ -101,8 +101,9 @@ int main()
 {
 	cout<<"****************MENU*****************\n1.Insert\n2.Delete\n3.Display\n4.Exit\n*************************************\n";
 
-	Heap myH;
-	int val,ch;
+	Heap<float> myH;
+	int ch;
+	float val;
 
 	while(1)
 	{
